@@ -21,6 +21,23 @@
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
           <% end %>
+          
+          <% if @user != current_user %>
+          <% if current_user.faborited_by?(@book.id) %>
+          <td><%= link_to destroy_faborite_path(@book), method: :delete do %>
+          <i class="fas fa-heart" style="color: red;"></i>
+          <%= @book.faborites.count %>
+          <% end %>
+          </td>
+        <% else %>
+          <td><%= link_to create_faborite_path(@book), method: :post do %>
+          <i class="fas fa-heart" style="color: gray;"></i>
+          <%= @book.faborites.count %>
+          <% end %>
+          </td>
+        <% end %>
+        <% end %>
+        
         </tr>
       </table>
     </div>

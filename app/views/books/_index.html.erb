@@ -16,6 +16,22 @@
         </td>
         <td><%= link_to book.title,book, class: "book_#{book.id}" %></td>
         <td><%= book.body %></td>
+
+        <% if current_user.faborited_by?(book.id) %>
+        <% if @user != current_user %>
+          <td><%= link_to destroy_faborite_path(book), method: :delete do %>
+          <i class="fas fa-heart" style="color: red;"></i>
+          <%= book.faborites.count %>
+          <% end %>
+          </td>
+        <% else %>
+          <td><%= link_to create_faborite_path(book), method: :post do %>
+          <i class="fas fa-heart" style="color: gray;"></i>
+          <%= book.faborites.count %>
+          <% end %>
+          </td>
+        <% end %>
+
       </tr>
     <% end %>
   </tbody>

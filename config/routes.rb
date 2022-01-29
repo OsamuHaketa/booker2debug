@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
   root :to =>"homes#top"
   get "home/about"=>"homes#about"
-
+  post 'faborite/:id' => 'faborites#create', as: 'create_faborite'
+  delete 'faborite/:id' => 'faborites#destroy', as: "destroy_faborite"
+  
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update]
   resources :users, only: [:index,:show,:edit,:update]
 
