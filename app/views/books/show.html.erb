@@ -40,14 +40,13 @@
           <% end %>
         </tr>
       </table>
-      <h2>Comment</h2>
-      <p><%= @book.book_comments.count %>Comments</p>
+
 
       <table class="table">
         <% @book.book_comments.each do |book_comment| %>
           <tr>
-            <td><%= link_to(book_comment.user) do %>
-            <%= image_tag book_comment.user.get_profile_image, size:"40x40" %><br>
+            <td><%= link_to(@book.user) do %>
+            <%= image_tag @book.user.get_profile_image, size:"40x40" %><br>
             <%= book_comment.user.name %>
             <% end %>
             <td>
