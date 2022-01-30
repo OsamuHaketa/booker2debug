@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   get "home/about"=>"homes#about"
   post 'faborite/:id' => 'faborites#create', as: 'create_faborite'
   delete 'faborite/:id' => 'faborites#destroy', as: "destroy_faborite"
-  
-  resources :books, only: [:index,:show,:edit,:create,:destroy,:update]
+
+  resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
+    resources :book_comments, only: [:create,:destroy]
+  end
+
   resources :users, only: [:index,:show,:edit,:update]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
