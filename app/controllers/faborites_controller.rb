@@ -1,12 +1,16 @@
 class FaboritesController < ApplicationController
 
   def create
-    Faborite.create(user_id: current_user.id, book_id: params[:id])
-    redirect_to books_path
+    book = Book.find(params[:book_id])
+    faborite = current_user.faborites.new(book_id: book.id)
+    faborite.save
+    redirect_to request.referer
   end
 
   def destroy
-    Faborite.find_by(user_id: current_user.id, book_id: params[:id]).destroy
-    redirect_to books_path
+    book = Book.find(params[:book_id])
+    faborite = current_user.faborites.find_by(book_id: book.id)
+    faborite.destroy
+    redirect_to request.referer
   end
 end

@@ -1,7 +1,12 @@
 class Book < ApplicationRecord
   belongs_to :user
-  has_many :faborites
   has_many :book_comments, dependent: :destroy
+  has_many :faborites, dependent: :destroy
+  
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
+  
+  def faborited_by?(user)
+    faborites.where(user_id: user.id).exists?
+  end
 end
