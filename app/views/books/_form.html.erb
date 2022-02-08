@@ -10,4 +10,19 @@
   <div class="form-group">
     <%= f.submit class: 'btn btn-success' %>
   </div>
+
+  <div class="form-group" id="star">
+    <%= f.label :star,'評価 ', class:'col-md-3 col-form-label' %>
+    <%= f.hidden_field :star, id: :review_star %>
+  </div>
+  <script>
+  $('#star').raty({
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf : '<%= asset_path('star-half.png') %>',
+    scoreName: 'book[star]',
+    half: true,
+  });
+  </script>
+
 <% end %>
