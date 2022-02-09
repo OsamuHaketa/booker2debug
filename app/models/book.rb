@@ -24,4 +24,13 @@ class Book < ApplicationRecord
     end
   end
   
+  scope :sort_books, -> (sort) { order(sort[:sort]) }
+  scope :sort_list, -> {
+    {
+      "並び替え" => "",
+      "作成の新しい順" => "updated_at DESC",
+      "評価の高い順" => "star DESC"
+    }
+  }
+  
 end
